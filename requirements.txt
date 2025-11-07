@@ -1,0 +1,7 @@
+python-dotenv
+faiss-cpu
+langchain
+requests
+tqdm
+bs4
+streamlit
