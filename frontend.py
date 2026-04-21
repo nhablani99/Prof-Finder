@@ -77,8 +77,8 @@ with st.sidebar:
         text-align: center;
         border-bottom: 2px solid #FFD54F;
     ">
-        <img src="https://uwaterloo.ca/brand/sites/ca.brand/files/universityofwaterloo_logo_horiz_rgb.png"
-             style="width: 100%; max-width: 240px; filter: brightness(0) invert(1);"
+        <img src="https://uwaterloo.ca/brand/sites/ca.brand/files/universityofwaterloo_logo_horiz_rev.png"
+             style="width: 100%; max-width: 240px;"
              alt="University of Waterloo">
     </div>
     """, unsafe_allow_html=True)
