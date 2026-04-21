@@ -46,6 +46,12 @@ st.markdown("""
     [data-testid="InputInstructions"] {
         display: none;
     }
+    #uw-logo {
+        position: fixed;
+        top: 14px;
+        left: 20px;
+        z-index: 999;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -56,9 +62,9 @@ def load_vectorstore():
 vectorstore = load_vectorstore()
 
 st.markdown("""
-<div style="text-align: left; padding: 10px 0 10px 0;">
+<div id="uw-logo">
     <img src="https://uwaterloo.ca/brand/sites/ca.brand/files/universityofwaterloo_logo_horiz_rev.png"
-         style="max-width: 200px;"
+         style="max-width: 180px;"
          alt="University of Waterloo">
 </div>
 """, unsafe_allow_html=True)
