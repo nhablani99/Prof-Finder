@@ -70,10 +70,19 @@ def load_vectorstore():
 vectorstore = load_vectorstore()
 
 with st.sidebar:
-    st.image(
-        "https://uwaterloo.ca/brand/sites/ca.brand/files/universityofwaterloo_logo_horiz_rgb.png",
-        use_container_width=True,
-    )
+    st.markdown("""
+    <div style="
+        background-color: #FFFFFF;
+        border-radius: 10px;
+        padding: 16px 20px;
+        margin-bottom: 16px;
+        text-align: center;
+    ">
+        <img src="https://uwaterloo.ca/brand/sites/ca.brand/files/universityofwaterloo_logo_horiz_rgb.png"
+             style="width: 100%; max-width: 260px;"
+             alt="University of Waterloo">
+    </div>
+    """, unsafe_allow_html=True)
     st.markdown("---")
     with st.form(key="user_input_form"):
         query = st.text_input(
