@@ -9,7 +9,7 @@ def _get_huggingface_api_key() -> str:
     if not key:
         try:
             import streamlit as st
-            key = st.secrets.get("HUGGINGFACE_API_KEY")
+            key = st.secrets["HUGGINGFACE_API_KEY"]
         except Exception:
             pass
     if not key:
