@@ -9,9 +9,10 @@ def _get_huggingface_api_key() -> str:
     if not key:
         try:
             import streamlit as st
+            print(f"Available secrets: {list(st.secrets)}")
             key = st.secrets["HUGGINGFACE_API_KEY"]
-        except Exception:
-            pass
+        except Exception as e:
+            print(f"Failed to read Streamlit secrets: {e}")
     if not key:
         raise ValueError("HUGGINGFACE_API_KEY not found. Set it in .env or Streamlit secrets.")
     return key
