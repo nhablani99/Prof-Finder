@@ -72,14 +72,13 @@ vectorstore = load_vectorstore()
 with st.sidebar:
     st.markdown("""
     <div style="
-        background-color: #FFFFFF;
-        border-radius: 10px;
-        padding: 16px 20px;
+        padding: 12px 16px;
         margin-bottom: 16px;
         text-align: center;
+        border-bottom: 2px solid #FFD54F;
     ">
         <img src="https://uwaterloo.ca/brand/sites/ca.brand/files/universityofwaterloo_logo_horiz_rgb.png"
-             style="width: 100%; max-width: 260px;"
+             style="width: 100%; max-width: 240px; filter: brightness(0) invert(1);"
              alt="University of Waterloo">
     </div>
     """, unsafe_allow_html=True)
