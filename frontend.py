@@ -60,6 +60,9 @@ st.markdown("""
     hr {
         border-color: #333333;
     }
+    [data-testid="InputInstructions"] {
+        display: none;
+    }
 </style>
 """, unsafe_allow_html=True)
 
