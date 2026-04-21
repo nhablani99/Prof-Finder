@@ -7,12 +7,16 @@ st.set_page_config(page_title="UW Prof Finder", layout="centered")
 
 st.markdown("""
 <style>
-    .stApp, [data-testid="stAppViewContainer"] {
-        background-color: #000000;
+    .stApp, [data-testid="stAppViewContainer"],
+    [data-testid="stMain"], [data-testid="stMainBlockContainer"],
+    [data-testid="stVerticalBlock"], [data-testid="stBottom"],
+    [data-testid="stBottomBlockContainer"],
+    .stApp > div, .stApp > div > div {
+        background-color: #000000 !important;
         color: #FFFFFF;
     }
     header[data-testid="stHeader"] {
-        background-color: #000000;
+        background-color: #000000 !important;
     }
     h1, h2, h3 {
         color: #FFD54F !important;
@@ -20,13 +24,31 @@ st.markdown("""
     p, span, label, li, div, .stMarkdown, .stText {
         color: #FFFFFF !important;
     }
+    [data-testid="stChatMessage"] {
+        background-color: #1a1a1a !important;
+        border-radius: 12px;
+        padding: 16px;
+        margin-bottom: 12px;
+        border: 1px solid #2a2a2a;
+    }
+    [data-testid="stChatInput"] {
+        background-color: #000000 !important;
+    }
+    [data-testid="stChatInput"] > div {
+        background-color: #000000 !important;
+    }
     .stChatInput textarea {
         background-color: #1a1a1a !important;
         color: #FFFFFF !important;
         border: 1px solid #FFD54F !important;
+        border-radius: 10px !important;
     }
     .stChatInput textarea::placeholder {
         color: #999999 !important;
+    }
+    .stChatInput button {
+        background-color: #FFD54F !important;
+        color: #000000 !important;
     }
     [data-testid="stChatMessageAvatarAssistant"] {
         background-color: #FFD54F !important;
