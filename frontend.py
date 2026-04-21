@@ -56,9 +56,9 @@ def load_vectorstore():
 vectorstore = load_vectorstore()
 
 st.markdown("""
-<div style="text-align: center; padding: 20px 0 10px 0;">
+<div style="text-align: left; padding: 10px 0 10px 0;">
     <img src="https://uwaterloo.ca/brand/sites/ca.brand/files/universityofwaterloo_logo_horiz_rev.png"
-         style="max-width: 280px; width: 80%;"
+         style="max-width: 200px;"
          alt="University of Waterloo">
 </div>
 """, unsafe_allow_html=True)
