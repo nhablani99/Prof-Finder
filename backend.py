@@ -3,21 +3,22 @@ from langchain_community.vectorstores import FAISS
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from dotenv import load_dotenv
 
-def load_faiss_vectorstore(vectorstore_dir: str) -> FAISS:
-    """
-    Loads the FAISS vectorstore from the specified directory.
-
-    Parameters:
-    - vectorstore_dir: Path to the directory containing the FAISS vectorstore.
-
-    Returns:
-    - vectorstore: The loaded FAISS vectorstore.
-    """
-    print(f"Loading FAISS vectorstore from {vectorstore_dir}...")
+def _get_huggingface_api_key() -> str:
     load_dotenv()
-    huggingface_api_key = os.getenv("HUGGINGFACE_API_KEY")
-    if not huggingface_api_key:
-        raise ValueError("OPENAI_API_KEY not found. Please set it in the .env file or pass it explicitly.")
+    key = os.getenv("HUGGINGFACE_API_KEY")
+    if not key:
+        try:
+            import streamlit as st
+            key = st.secrets.get("HUGGINGFACE_API_KEY")
+        except Exception:
+            pass
+    if not key:
+        raise ValueError("HUGGINGFACE_API_KEY not found. Set it in .env or Streamlit secrets.")
+    return key
+
+def load_faiss_vectorstore(vectorstore_dir: str) -> FAISS:
+    print(f"Loading FAISS vectorstore from {vectorstore_dir}...")
+    huggingface_api_key = _get_huggingface_api_key()
 
     embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
     vectorstore = FAISS.load_local(vectorstore_dir, embeddings,allow_dangerous_deserialization=True)
@@ -32,10 +33,7 @@ def search_vectorstore(vectorstore: FAISS, query:str) -> list:
     return results
 
 if __name__ == "__main__":
-    load_dotenv()
-    huggingface_api_key = os.getenv("HUGGINGFACE_API_KEY")
-    if not huggingface_api_key:
-        raise ValueError("OPENAI_API_KEY not found in environment variables.")
+    huggingface_api_key = _get_huggingface_api_key()
     
     vectorstore_dir = "data_new/faiss"
 
