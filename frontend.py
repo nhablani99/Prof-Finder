@@ -7,39 +7,58 @@ st.set_page_config(page_title="UW Prof Finder", layout="centered")
 
 st.markdown("""
 <style>
-    .stApp {
+    .stApp, [data-testid="stAppViewContainer"] {
         background-color: #000000;
+        color: #FFFFFF;
     }
     header[data-testid="stHeader"] {
         background-color: #000000;
     }
-    .stSidebar {
+    .stSidebar, [data-testid="stSidebar"] {
         background-color: #1a1a1a;
+        color: #FFFFFF;
     }
     h1, h2, h3 {
-        color: #FFD54F;
+        color: #FFD54F !important;
     }
-    .stMarkdown p, .stMarkdown li {
-        color: #FFFFFF;
+    p, span, label, li, div, .stMarkdown, .stText {
+        color: #FFFFFF !important;
+    }
+    [data-testid="stSidebar"] label,
+    [data-testid="stSidebar"] p,
+    [data-testid="stSidebar"] span {
+        color: #FFFFFF !important;
     }
     div[data-testid="stFormSubmitButton"] > button {
         background-color: #FFD54F;
-        color: #000000;
+        color: #000000 !important;
         font-weight: bold;
         border: none;
     }
     div[data-testid="stFormSubmitButton"] > button:hover {
         background-color: #FFCA28;
-        color: #000000;
+        color: #000000 !important;
     }
     .stTextInput input {
         background-color: #1a1a1a;
-        color: #FFFFFF;
+        color: #FFFFFF !important;
         border: 1px solid #FFD54F;
     }
-    .stSuccess {
+    .stTextInput input::placeholder {
+        color: #999999 !important;
+    }
+    [data-testid="stAlert"] {
         background-color: #1a1a1a;
-        color: #FFD54F;
+        color: #FFFFFF !important;
+    }
+    [data-testid="stAlert"] p {
+        color: #FFD54F !important;
+    }
+    a {
+        color: #FFD54F !important;
+    }
+    hr {
+        border-color: #333333;
     }
 </style>
 """, unsafe_allow_html=True)
