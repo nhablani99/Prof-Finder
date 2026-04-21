@@ -14,42 +14,25 @@ st.markdown("""
     header[data-testid="stHeader"] {
         background-color: #000000;
     }
-    .stSidebar, [data-testid="stSidebar"] {
-        background-color: #1a1a1a;
-        color: #FFFFFF;
-    }
     h1, h2, h3 {
         color: #FFD54F !important;
     }
     p, span, label, li, div, .stMarkdown, .stText {
         color: #FFFFFF !important;
     }
-    [data-testid="stSidebar"] label,
-    [data-testid="stSidebar"] p,
-    [data-testid="stSidebar"] span {
+    .stChatInput textarea {
+        background-color: #1a1a1a !important;
         color: #FFFFFF !important;
+        border: 1px solid #FFD54F !important;
     }
-    div[data-testid="stFormSubmitButton"] > button {
-        background-color: #FFD54F;
-        color: #000000 !important;
-        font-weight: bold;
-        border: none;
-    }
-    div[data-testid="stFormSubmitButton"] > button:hover {
-        background-color: #FFCA28;
-        color: #000000 !important;
-    }
-    .stTextInput input {
-        background-color: #1a1a1a;
-        color: #FFFFFF !important;
-        border: 1px solid #FFD54F;
-    }
-    .stTextInput input::placeholder {
+    .stChatInput textarea::placeholder {
         color: #999999 !important;
+    }
+    [data-testid="stChatMessageAvatarAssistant"] {
+        background-color: #FFD54F !important;
     }
     [data-testid="stAlert"] {
         background-color: #1a1a1a;
-        color: #FFFFFF !important;
     }
     [data-testid="stAlert"] p {
         color: #FFD54F !important;
@@ -72,48 +55,49 @@ def load_vectorstore():
 
 vectorstore = load_vectorstore()
 
-with st.sidebar:
-    st.markdown("""
-    <div style="
-        padding: 12px 16px;
-        margin-bottom: 16px;
-        text-align: center;
-        border-bottom: 2px solid #FFD54F;
-    ">
-        <img src="https://uwaterloo.ca/brand/sites/ca.brand/files/universityofwaterloo_logo_horiz_rev.png"
-             style="width: 100%; max-width: 240px;"
-             alt="University of Waterloo">
-    </div>
-    """, unsafe_allow_html=True)
-    st.markdown("---")
-    with st.form(key="user_input_form"):
-        query = st.text_input(
-            "Research topic, professor name, or department",
-            max_chars=100,
-            placeholder="e.g., Machine Learning, John Doe, Computer Science",
-        )
-        submit = st.form_submit_button("Search")
+st.markdown("""
+<div style="text-align: center; padding: 20px 0 10px 0;">
+    <img src="https://uwaterloo.ca/brand/sites/ca.brand/files/universityofwaterloo_logo_horiz_rev.png"
+         style="max-width: 280px; width: 80%;"
+         alt="University of Waterloo">
+</div>
+""", unsafe_allow_html=True)
 
-st.title("UW Prof Finder")
-st.write("Search for professors at the University of Waterloo")
+st.markdown("<h1 style='text-align: center;'>UW Prof Finder</h1>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #999999 !important;'>Search for professors at the University of Waterloo</p>", unsafe_allow_html=True)
 
-if submit:
-    if query.strip():
+if "messages" not in st.session_state:
+    st.session_state.messages = []
+
+for msg in st.session_state.messages:
+    with st.chat_message(msg["role"]):
+        st.markdown(msg["content"], unsafe_allow_html=True)
+
+query = st.chat_input("Search by topic, professor name, or department...")
+
+if query:
+    st.session_state.messages.append({"role": "user", "content": query})
+    with st.chat_message("user"):
+        st.markdown(query)
+
+    with st.chat_message("assistant"):
         with st.spinner("Searching..."):
             results = search_vectorstore(vectorstore, query)
+
         if results:
-            st.success(f"Found {len(results)} result(s) for your query.")
+            response = f"Found **{len(results)}** result(s) for your query.\n\n---\n\n"
             for i, result in enumerate(results, 1):
-                st.markdown(f"### Result {i}")
-                st.write(f"**Name**: {result.metadata.get('name', 'N/A')}")
-                st.write(f"**Title**: {result.metadata.get('title', 'N/A')}")
-                st.write(f"**Department**: {result.metadata.get('department', 'N/A')}")
-                st.write(f"**Email**: {result.metadata.get('email', 'N/A')}")
-                st.write(f"**Expertise**: {result.metadata.get('expertise', 'N/A')}")
-                st.write(f"**Profile URL**: [Profile Link]({result.metadata.get('profile_url', 'N/A')})")
-                st.write(f"**Content**: {result.page_content}")
-                st.markdown("---")
+                response += f"### Result {i}\n"
+                response += f"**Name**: {result.metadata.get('name', 'N/A')}\n\n"
+                response += f"**Title**: {result.metadata.get('title', 'N/A')}\n\n"
+                response += f"**Department**: {result.metadata.get('department', 'N/A')}\n\n"
+                response += f"**Email**: {result.metadata.get('email', 'N/A')}\n\n"
+                response += f"**Expertise**: {result.metadata.get('expertise', 'N/A')}\n\n"
+                response += f"**Profile URL**: [Profile Link]({result.metadata.get('profile_url', 'N/A')})\n\n"
+                response += f"**Content**: {result.page_content}\n\n---\n\n"
+            st.markdown(response)
         else:
-            st.warning("No results found for your query.")
-    else:
-        st.error("Please enter a query to search.")
+            response = "No results found for your query. Try a different search term."
+            st.warning(response)
+
+    st.session_state.messages.append({"role": "assistant", "content": response})
