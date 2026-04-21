@@ -11,8 +11,8 @@ def _get_huggingface_api_key() -> str:
             import streamlit as st
             if hasattr(st, "secrets") and "HUGGINGFACE_API_KEY" in st.secrets:
                 key = st.secrets["HUGGINGFACE_API_KEY"]
-        except Exception as e:
-            print(f"Failed to read Streamlit secrets: {e}")
+        except Exception:
+            pass
     if not key:
         raise ValueError("HUGGINGFACE_API_KEY not found. Set it in .env or Streamlit secrets.")
     return key
