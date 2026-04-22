@@ -25,11 +25,11 @@ st.markdown("""
         color: #FFFFFF !important;
     }
     [data-testid="stChatMessage"] {
-        background-color: #2a2a2a !important;
+        background-color: #3a3a3a !important;
         border-radius: 12px;
         padding: 16px;
         margin-bottom: 12px;
-        border: 1px solid #3a3a3a;
+        border: 1px solid #4a4a4a;
     }
     [data-testid="stChatInput"],
     [data-testid="stChatInput"] > div,
