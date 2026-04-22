@@ -24,8 +24,12 @@ st.markdown("""
     p, span, label, li, div, .stMarkdown, .stText {
         color: #FFFFFF !important;
     }
-    [data-testid="stChatMessage"] {
+    [data-testid="stChatMessage"],
+    [data-testid="stChatMessage"] * {
         background-color: #3a3a3a !important;
+        border-color: #4a4a4a !important;
+    }
+    [data-testid="stChatMessage"] {
         border-radius: 12px;
         padding: 16px;
         margin-bottom: 12px;
