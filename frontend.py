@@ -35,14 +35,14 @@ st.markdown("""
         margin-bottom: 12px;
         border: 1px solid #4a4a4a;
     }
-    [data-testid="stChatInput"],
-    [data-testid="stChatInput"] > div,
-    [data-testid="stChatInput"] * {
+    [data-testid="stChatInput"] {
         background-color: #000000 !important;
-        border: none !important;
+    }
+    .stChatInput > div,
+    .stChatInput > div * {
+        background-color: #2f2f2f !important;
     }
     .stChatInput > div {
-        background-color: #2f2f2f !important;
         border: 1px solid #424242 !important;
         border-radius: 16px !important;
         padding: 4px 8px !important;
@@ -52,7 +52,7 @@ st.markdown("""
         border-color: #616161 !important;
     }
     .stChatInput textarea {
-        background-color: transparent !important;
+        background-color: #2f2f2f !important;
         color: #FFFFFF !important;
         border: none !important;
         border-radius: 0 !important;
