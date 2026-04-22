@@ -112,15 +112,28 @@ st.markdown("""
     [data-testid="InputInstructions"] {
         display: none;
     }
+    [data-testid="stChatMessage"] [data-testid="column"]:last-child {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
     [data-testid="stChatMessage"] [data-testid="column"]:last-child button {
-        opacity: 0;
-        transition: opacity 0.2s ease;
+        opacity: 0 !important;
+        transition: opacity 0.2s ease !important;
         background-color: transparent !important;
         border: none !important;
-        font-size: 14px !important;
+        box-shadow: none !important;
+        padding: 4px 8px !important;
+        min-height: 0 !important;
+        height: auto !important;
+        line-height: 1 !important;
     }
     [data-testid="stChatMessage"]:hover [data-testid="column"]:last-child button {
-        opacity: 1;
+        opacity: 1 !important;
+    }
+    [data-testid="stChatMessage"] [data-testid="column"]:last-child button:hover {
+        background-color: #4a4a4a !important;
+        border-radius: 6px !important;
     }
     .stTextInput input {
         background-color: #2f2f2f !important;
