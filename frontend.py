@@ -95,7 +95,12 @@ st.markdown("""
         margin: 0 auto !important;
     }
     [data-testid="stChatMessageAvatarAssistant"] {
-        background-color: #FFD54F !important;
+        background-color: #3a3a3a !important;
+        border-radius: 50% !important;
+    }
+    [data-testid="stChatMessageAvatarUser"] {
+        background-color: #3a3a3a !important;
+        border-radius: 50% !important;
     }
     [data-testid="stAlert"] {
         background-color: #1a1a1a;
