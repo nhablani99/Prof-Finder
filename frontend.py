@@ -84,7 +84,7 @@ st.markdown("""
     }
     #uw-logo {
         position: fixed;
-        top: 28px;
+        top: 42px;
         left: 20px;
         z-index: 999;
     }
