@@ -3,7 +3,7 @@ from backend import load_faiss_vectorstore, search_vectorstore
 
 VECTORSTORE_DIR = "data_new/faiss"
 
-st.set_page_config(page_title="UW Prof Finder", layout="centered")
+st.set_page_config(page_title="UW Prof Finder", layout="wide")
 
 st.markdown("""
 <style>
@@ -31,17 +31,17 @@ st.markdown("""
         margin-bottom: 12px;
         border: 1px solid #2a2a2a;
     }
-    [data-testid="stChatInput"] {
-        background-color: #000000 !important;
-    }
-    [data-testid="stChatInput"] > div {
+    [data-testid="stChatInput"],
+    [data-testid="stChatInput"] > div,
+    [data-testid="stChatInput"] * {
         background-color: #000000 !important;
     }
     .stChatInput textarea {
-        background-color: #1a1a1a !important;
+        background-color: #000000 !important;
         color: #FFFFFF !important;
         border: 1px solid #FFD54F !important;
-        border-radius: 10px !important;
+        border-radius: 24px !important;
+        padding: 12px 20px !important;
     }
     .stChatInput textarea::placeholder {
         color: #999999 !important;
@@ -49,6 +49,20 @@ st.markdown("""
     .stChatInput button {
         background-color: #FFD54F !important;
         color: #000000 !important;
+        border-radius: 50% !important;
+    }
+    [data-testid="stBottom"],
+    [data-testid="stBottom"] > div,
+    [data-testid="stBottomBlockContainer"] {
+        background-color: #000000 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        padding-left: 5% !important;
+        padding-right: 5% !important;
+    }
+    [data-testid="stMainBlockContainer"] {
+        max-width: 800px !important;
+        margin: 0 auto !important;
     }
     [data-testid="stChatMessageAvatarAssistant"] {
         background-color: #FFD54F !important;
@@ -70,7 +84,7 @@ st.markdown("""
     }
     #uw-logo {
         position: fixed;
-        top: 14px;
+        top: 28px;
         left: 20px;
         z-index: 999;
     }
