@@ -117,35 +117,6 @@ st.markdown("""
     [data-testid="InputInstructions"] {
         display: none;
     }
-    [data-testid="stChatMessage"] [data-testid="column"]:last-child {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-    }
-    [data-testid="stChatMessage"] [data-testid="column"]:last-child button {
-        opacity: 0 !important;
-        transition: opacity 0.2s ease !important;
-        background-color: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-        padding: 4px 8px !important;
-        min-height: 0 !important;
-        height: auto !important;
-        line-height: 1 !important;
-    }
-    [data-testid="stChatMessage"]:hover [data-testid="column"]:last-child button {
-        opacity: 1 !important;
-    }
-    [data-testid="stChatMessage"] [data-testid="column"]:last-child button:hover {
-        background-color: #4a4a4a !important;
-        border-radius: 6px !important;
-    }
-    .stTextInput input {
-        background-color: #2f2f2f !important;
-        color: #FFFFFF !important;
-        border: 1px solid #424242 !important;
-        border-radius: 8px !important;
-    }
     #uw-logo {
         position: fixed;
         top: 42px;
@@ -175,41 +146,11 @@ st.markdown("<p style='text-align: center; color: #999999 !important;'>Search fo
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-if "edit_index" not in st.session_state:
-    st.session_state.edit_index = None
-
-def edit_message(idx):
-    st.session_state.edit_index = idx
-
-for i, msg in enumerate(st.session_state.messages):
+for msg in st.session_state.messages:
     with st.chat_message(msg["role"]):
-        if msg["role"] == "user" and st.session_state.edit_index == i:
-            edited = st.text_input("Edit your query:", value=msg["content"], key=f"edit_{i}", label_visibility="collapsed")
-            col1, col2 = st.columns([1, 1])
-            with col1:
-                if st.button("Submit", key=f"submit_{i}"):
-                    st.session_state.messages = st.session_state.messages[:i]
-                    st.session_state.edit_index = None
-                    st.session_state.pending_query = edited
-                    st.rerun()
-            with col2:
-                if st.button("Cancel", key=f"cancel_{i}"):
-                    st.session_state.edit_index = None
-                    st.rerun()
-        elif msg["role"] == "user":
-            col_msg, col_btn = st.columns([20, 1])
-            with col_msg:
-                st.markdown(msg["content"], unsafe_allow_html=True)
-            with col_btn:
-                st.button("✏️", key=f"edit_btn_{i}", on_click=edit_message, args=(i,), help="Edit this query")
-        else:
-            st.markdown(msg["content"], unsafe_allow_html=True)
+        st.markdown(msg["content"], unsafe_allow_html=True)
 
 query = st.chat_input("Search by topic, professor name, or department...")
-
-if "pending_query" in st.session_state and st.session_state.pending_query:
-    query = st.session_state.pending_query
-    st.session_state.pending_query = None
 
 if query:
     st.session_state.messages.append({"role": "user", "content": query})
