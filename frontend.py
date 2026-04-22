@@ -42,6 +42,13 @@ st.markdown("""
         border: 1px solid #FFD54F !important;
         border-radius: 24px !important;
         padding: 12px 20px !important;
+        outline: none !important;
+        box-shadow: none !important;
+    }
+    .stChatInput textarea:focus {
+        border: 1px solid #FFD54F !important;
+        outline: none !important;
+        box-shadow: none !important;
     }
     .stChatInput textarea::placeholder {
         color: #999999 !important;
