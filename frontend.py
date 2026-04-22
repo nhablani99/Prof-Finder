@@ -35,28 +35,47 @@ st.markdown("""
     [data-testid="stChatInput"] > div,
     [data-testid="stChatInput"] * {
         background-color: #000000 !important;
+        border: none !important;
+    }
+    .stChatInput > div {
+        background-color: #2f2f2f !important;
+        border: 1px solid #424242 !important;
+        border-radius: 16px !important;
+        padding: 4px 8px !important;
+        transition: border-color 0.2s ease !important;
+    }
+    .stChatInput > div:focus-within {
+        border-color: #616161 !important;
     }
     .stChatInput textarea {
-        background-color: #000000 !important;
+        background-color: transparent !important;
         color: #FFFFFF !important;
-        border: 1px solid #FFD54F !important;
-        border-radius: 24px !important;
-        padding: 12px 20px !important;
+        border: none !important;
+        border-radius: 0 !important;
+        padding: 10px 12px !important;
         outline: none !important;
         box-shadow: none !important;
+        font-size: 15px !important;
+        line-height: 1.5 !important;
     }
     .stChatInput textarea:focus {
-        border: 1px solid #FFD54F !important;
+        border: none !important;
         outline: none !important;
         box-shadow: none !important;
     }
     .stChatInput textarea::placeholder {
-        color: #999999 !important;
+        color: #8e8e8e !important;
     }
     .stChatInput button {
-        background-color: #FFD54F !important;
-        color: #000000 !important;
-        border-radius: 50% !important;
+        background-color: transparent !important;
+        color: #8e8e8e !important;
+        border: none !important;
+        border-radius: 8px !important;
+        transition: color 0.2s ease !important;
+    }
+    .stChatInput button:hover {
+        color: #FFFFFF !important;
+        background-color: #424242 !important;
     }
     [data-testid="stBottom"],
     [data-testid="stBottom"] > div,
